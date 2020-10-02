@@ -1,0 +1,35 @@
+{% include('header.html') %}
+<h1><center>Sahara</center></h1>
+<h3>Cart</h3>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Unit price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total</th>
+        <th scope="col">-</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in item_data %}
+      <tr>
+        <td>{{ item.title }}</td>
+        <td>$ {{ item.price }}</td>
+        <td>{{ item_data[item] }}</td>
+        <td>$ {{ item_data[item] * item.price }}</td>
+        <td><a href="{{ url_for('remove_from_cart', item_id=item.id) }}" class="btn btn-sm btn-danger">Remove</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between">
+    <div>
+        <a href="{{ url_for('home_page') }}" class="btn btn-primary"> Shop more products </a>
+    </div>
+    <div>
+        <a href="{{ url_for('checkout_cart') }}" class="btn btn-success"> Checkout cart : $ {{ total }} </a>
+    </div>
+</div>
+  
+{% include('footer.html') %}

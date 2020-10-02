@@ -1,0 +1,11 @@
+{% include('header.html') %}
+<h1><center>Thanks for shopping at Sahara</center></h1>
+<div class="card">
+    <img class="card-img-top" src="{{ item.img_url }}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{ item.title }}</h5>
+        <p class="card-text">{{ item.description }}</p>
+    </div>
+</div>
+<a href="{{ url_for('home_page') }}" class="btn btn-primary"> Shop more products </a>
+{% include('footer.html') %}
