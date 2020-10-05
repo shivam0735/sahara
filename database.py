@@ -33,3 +33,12 @@ class SellerItem(db.Model):
 
 def initialize_db():
     db.create_all()
+
+def add_object(obj):
+    db.session.add(obj)
+    return obj
+
+def save_object(obj):
+    add_object(obj)
+    db.session.commit()
+    return obj

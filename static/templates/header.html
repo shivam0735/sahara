@@ -16,9 +16,16 @@
             </div>
           </div>
         </form>
+        {% if current_user %}
+        <span class="navbar-text">Hi! <b>{{ current_user.name }}</b> &nbsp; &nbsp;</span>
+        <a class="btn btn-outline-primary" href="{{ url_for('logout') }}">Logout</a>
+        &nbsp; &nbsp;
+        <button class="btn btn-outline-primary"><i class="fa fa-shopping-cart"></i> Cart</button>
+        {% else %}
         <button class="btn btn-outline-primary" data-toggle="modal" data-target="#login-modal"> Login / Sign-Up</button>
         &nbsp; &nbsp;
         <button class="btn btn-outline-primary" disabled><i class="fa fa-shopping-cart"></i> Cart</button>
+        {% endif %}
       </nav>
       <div class="modal" tabindex="-1" role="dialog" id="login-modal">
         <div class="modal-dialog" role="document">
