@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import EmailType, PasswordType
-from sqlalchemy import Table, Column, Integer, ForeignKey, String, Float
+from sqlalchemy import Table, Column, Integer, ForeignKey, String, Float, Boolean
 from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
@@ -14,6 +14,21 @@ class User(db.Model):
     password = Column(String(40), nullable=False)
     
     name = Column(String(80), nullable=False)
+
+
+class Order(db.Model):
+    __tablename__ = 'order'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user = relationship("User")
+    item_id = Column(Integer, ForeignKey('item.id'), nullable=False)
+    item = relationship("Item")
+    seller_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    seller = relationship("User")
+    quantity = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False)
+    is_complete = Column(Boolean, default=False)
+    in_cart = Column(Boolean, default=True)
 
 class Item(db.Model):
     __tablename__ = 'item'

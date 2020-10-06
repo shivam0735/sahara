@@ -1,0 +1,17 @@
+   in_cart    True            False
+is_complete  
+
+True          Not Possible    Past Order
+False         In the cart     Current Order
+
+
+Buyer side
+==========
+Add to cart :-> new Order(in_cart=True, is_complete=False)
+Buy Now :-> new Order(in_cart=False, is_complete=True)
+Checkout cart :-> old Order(in_cart=False) [is_complete is already false]
+
+Seller side
+===========
+Display only orders which have in_cart=False
+Deliver Order :-> old Order(is_complete=True)

@@ -35,7 +35,7 @@
         <div class="card text-center w-25">
             <img class="card-img-top home-item-card" src="{{ item.img_url or '/static/img/placeholder_item.jpg' }}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{ item.title }}</h5>
+                <h5 class="card-title"><a href="{{ url_for('show_item', id=item.id) }}">{{ item.title }}</a></h5>
                 <p>{{ item.description }} </p>                
             </div>
         </div>

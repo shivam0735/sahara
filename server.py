@@ -49,6 +49,22 @@ def login():
         print("User logged in successfully for id:{}".format(user_id))
         return make_login_response(redirect(url_for('home_page')), user_id)
 
+@app.route('/item/<id>')
+def show_item(id):
+    item = database.Item.query.get(id)
+    if item is None:
+        return "Item not found", 404
+    
+    seller_items = database.SellerItem.query.filter_by(item_id=item.id)
+    seller_data = []
+    for seller_item in seller_items:
+        seller_data_row = {}
+        seller_data_row['quantity'] = seller_item.quantity
+        seller_data_row['price'] = seller_item.price
+        seller_data_row['name'] = seller_item.seller.name
+        seller_data.append(seller_data_row)
+
+    return render_template('item.html', item=item, seller_data=seller_data)
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

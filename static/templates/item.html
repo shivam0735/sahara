@@ -1,0 +1,43 @@
+{% include('header.html') %}
+<div class="row" style="padding-top: 40px">
+    <div class="col-md-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <img src="{{ item.img_url or '/static/img/placeholder_item.jpg' }}" alt="Card image cap" style="width: inherit;">
+                </div>
+                <div class="col-md-6">
+                    <h1>{{ item.title }}</h1>
+                    <hr>
+                    <p>{{ item.description }}</p>
+                    {% if seller_data %}
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Seller Name</th>
+                                    <th scope="col">Offer price</th>
+                                    <th scope="col">Stock left</th>
+                                </tr>
+                            </thead>
+                            {% for row in seller_data %}
+                                <tr>
+                                    <td>{{ row['name'] }}</td>
+                                    <td>$ {{ row['price'] }}</td>
+                                    <td>{{ row['quantity'] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        <h3 class="text-danger">Out of stock</h3>
+                    {% endif %}
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 text-center"  style="border-radius: 10px;border: 1px solid #c0c0C0; padding: 20px" >
+        <a class="btn btn-primary">Add to cart</a>
+        <br></br>
+        <a class="btn btn-primary">Buy Now</a>
+    </div>
+</div>
+{% include('footer.html') %}
