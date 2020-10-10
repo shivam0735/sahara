@@ -20,15 +20,18 @@ class Order(db.Model):
     __tablename__ = 'order'
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    user = relationship("User")
+    user = relationship("User", foreign_keys=[user_id])
     item_id = Column(Integer, ForeignKey('item.id'), nullable=False)
     item = relationship("Item")
     seller_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    seller = relationship("User")
+    seller = relationship("User", foreign_keys=[seller_id])
     quantity = Column(Integer, nullable=False)
     price = Column(Float, nullable=False)
     is_complete = Column(Boolean, default=False)
     in_cart = Column(Boolean, default=True)
+
+    def total(self):
+        return self.price * self.quantity
 
 class Item(db.Model):
     __tablename__ = 'item'
@@ -53,7 +56,22 @@ def add_object(obj):
     db.session.add(obj)
     return obj
 
+def delete_object(obj):
+    db.session.delete(obj)
+    return obj
+
 def save_object(obj):
     add_object(obj)
     db.session.commit()
     return obj
+
+def remove_object(obj):
+    delete_object(obj)
+    db.session.commit()
+    return obj
+
+def save_objects(objects):
+    for obj in objects:
+        add_object(obj)
+    db.session.commit()
+

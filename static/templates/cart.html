@@ -1,5 +1,4 @@
 {% include('header.html') %}
-<h1><center>Sahara</center></h1>
 <h3>Cart</h3>
 <table class="table">
     <thead class="thead-dark">
@@ -12,13 +11,13 @@
       </tr>
     </thead>
     <tbody>
-    {% for item in item_data %}
+    {% for order in orders %}
       <tr>
-        <td>{{ item.title }}</td>
-        <td>$ {{ item.price }}</td>
-        <td>{{ item_data[item] }}</td>
-        <td>$ {{ item_data[item] * item.price }}</td>
-        <td><a href="{{ url_for('remove_from_cart', item_id=item.id) }}" class="btn btn-sm btn-danger">Remove</a></td>
+        <td>{{ order.item.title }}</td>
+        <td>$ {{ order.price }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>$ {{ order.total() }}</td>
+        <td><a href="{{ url_for('remove_from_cart', order_id=order.id) }}" class="btn btn-sm btn-danger">Remove</a></td>
       </tr>
     {% endfor %}
     </tbody>

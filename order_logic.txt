@@ -8,7 +8,7 @@ False         In the cart     Current Order
 Buyer side
 ==========
 Add to cart :-> new Order(in_cart=True, is_complete=False)
-Buy Now :-> new Order(in_cart=False, is_complete=True)
+Buy Now :-> new Order(in_cart=False, is_complete=false)
 Checkout cart :-> old Order(in_cart=False) [is_complete is already false]
 
 Seller side

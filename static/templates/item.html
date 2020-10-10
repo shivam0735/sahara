@@ -10,20 +10,26 @@
                     <h1>{{ item.title }}</h1>
                     <hr>
                     <p>{{ item.description }}</p>
-                    {% if seller_data %}
+                    {% if seller_items %}
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">Seller Name</th>
                                     <th scope="col">Offer price</th>
                                     <th scope="col">Stock left</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
-                            {% for row in seller_data %}
+                            {% for selleritem in seller_items %}
                                 <tr>
-                                    <td>{{ row['name'] }}</td>
-                                    <td>$ {{ row['price'] }}</td>
-                                    <td>{{ row['quantity'] }}</td>
+                                    <td>{{ selleritem.seller.name }}</td>
+                                    <td>$ {{ selleritem.price }}</td>
+                                    <td>{{ selleritem.quantity }}</td>
+                                    <td>
+                                        <a href="{{ url_for('buy_item', seller_id=selleritem.seller_id, item_id=selleritem.item_id) }}" class="btn btn-sm btn-primary">Buy</a>
+                                        &nbsp;
+                                        <a href="{{ url_for('add_to_cart', seller_id=selleritem.seller_id, item_id=selleritem.item_id) }}" class="btn btn-sm btn-primary">Add to cart</a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </table>
